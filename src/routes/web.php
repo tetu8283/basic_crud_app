@@ -1,15 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MicropostController;
+
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/post_index', [MicropostController::class, 'index'])
+    // アクセスする前にauthとverifiedというミドルウェアが実行される
+    // authはユーザのログインを、verifiedはメアドが確認済みかを確認する
+    ->middleware(['auth', 'verified'])
+    ->name('index_page'); // 名前をつける
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

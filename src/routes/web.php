@@ -6,8 +6,9 @@ use App\Http\Controllers\MicropostController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/users', [UserController::class, 'index']) -> name('users.index');
+Route::resource('/users', UserController::class);
 Route::get('/postsIndex', [MicropostController::class, 'index'])
+
     // アクセスする前にauthとverifiedというミドルウェアが実行される
     // authはユーザのログインを、verifiedはメアドが確認済みかを確認する
     ->middleware(['auth', 'verified'])

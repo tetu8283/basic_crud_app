@@ -47,7 +47,9 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        // 編集するユーザーを取得(見つからなければ404になる)
+        $user = User::findOrFail($id);
+        return view('users.UserEdit', compact('user')); # viewにu更新したuserを渡す
     }
 
     /**
@@ -55,7 +57,18 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // バリデーション設定
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+        ]);
+
+        // ユーザー情報を更新
+        $user = User::findOrFail($id);
+        $user->update($validated);
+
+        // ユーザー一覧にリダイレクト
+        return redirect()->route('users.index')->with('success', 'ユーザー情報を更新しました。');
     }
 
     /**

@@ -20,7 +20,10 @@
             @foreach ($users as $user)
                 <tr>
                     <td>{{ $user->id }}</td>
-                    <td>{{ $user->name}}</td>
+                    <td>
+                        {{-- ルートのusers.updateとidを引数に与える --}}
+                        <a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a>
+                    </td>
                     <td>{{ $user->email}}</td>
                 </tr>
             @endforeach

@@ -48,11 +48,15 @@ class User extends Authenticatable
         ];
     }
 
-    // デフォルト画像かどうかを確認するロジック
+
+    /**
+     * デフォルト画像かどうかを確認するロジック
+     * @return string
+     */
     public function getProfileImageUrlAttribute()
     {
         if ($this->profile_image && Storage::disk('public')->exists($this->profile_image)) {
-            return asset('storage/' . $this->profile_image); // アップロードされた画像
+            return asset('storage/' . $this->profile_image); // ストレージに保存された画像のURLを返す
         }
         return asset('images/no-image.png'); // デフォルト画像
     }

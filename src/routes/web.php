@@ -6,9 +6,9 @@ use App\Http\Controllers\MicropostController;
 
 use Illuminate\Support\Facades\Route;
 
-// showを除外
-Route::resource('/users', UserController::class)->except(['show']);
-Route::get('/postsIndex', [MicropostController::class, 'index'])
+// ユーザ作成はBreezeで行うため除外する(showはシンプルに使わない)
+Route::resource('/users', UserController::class)->except(['store', 'create', 'show']);
+Route::get('/postsIndex', [MicropostController::class, 'index']) // とりあえずのルーティング
 
     // アクセスする前にauthとverifiedというミドルウェアが実行される
     // authはユーザのログインを、verifiedはメアドが確認済みかを確認する

@@ -6,11 +6,12 @@ use App\Http\Controllers\MicropostController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/post_index', [MicropostController::class, 'index'])
+Route::get('/users', [UserController::class, 'index']) -> name('users.index');
+Route::get('/postsIndex', [MicropostController::class, 'index'])
     // アクセスする前にauthとverifiedというミドルウェアが実行される
     // authはユーザのログインを、verifiedはメアドが確認済みかを確認する
     ->middleware(['auth', 'verified'])
-    ->name('index_page'); // 名前をつける
+    ->name('posts.index'); // 名前をつける
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

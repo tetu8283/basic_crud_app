@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+
 
 class UserController extends Controller
 {
@@ -11,7 +13,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        
+        $users = User::paginate(10); # 1ページ10件で表示
+        # compactを使用して、viewのforeachの$usersにデータを渡す
+        return view('users.UserIndex', compact('users')); 
     }
 
     /**
@@ -19,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

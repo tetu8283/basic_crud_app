@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Micropost;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; 
 
 class MicropostController extends Controller
 {
@@ -12,7 +12,9 @@ class MicropostController extends Controller
      */
     public function index()
     {
-        return view('microposts.MicropostIndex');
+        // ログイン中のuserを取得
+        $user = Auth::user();
+        return view('microposts.MicropostIndex', compact('user'));
     }
 
     /**

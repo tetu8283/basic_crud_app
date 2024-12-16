@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -21,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_image'
     ];
 
     /**
@@ -44,5 +46,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // デフォルト画像かどうかを確認するロジック
+    public function getProfileImageUrlAttribute()
+    {
+        if ($this->profile_image && Storage::disk('public')->exists($this->profile_image)) {
+            return asset('storage/' . $this->profile_image); // アップロードされた画像
+        }
+        return asset('images/no-image.png'); // デフォルト画像
     }
 }

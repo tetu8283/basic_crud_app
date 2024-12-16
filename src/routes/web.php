@@ -6,7 +6,8 @@ use App\Http\Controllers\MicropostController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::resource('/users', UserController::class);
+// showを除外
+Route::resource('/users', UserController::class)->except(['show']);
 Route::get('/postsIndex', [MicropostController::class, 'index'])
 
     // アクセスする前にauthとverifiedというミドルウェアが実行される

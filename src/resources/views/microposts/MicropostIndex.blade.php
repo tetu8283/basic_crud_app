@@ -19,7 +19,9 @@
 
     {{-- $userオブジェクトのnameを取得し、ログイン中のユーザーの名前を表示 --}}
     <p>Hello {{ $user->name }}</p> 
-    <p>Email：{{ $user->email }}</p> 
-    <p>Password：{{ $user->password}}</p> 
+
+    <div class="toUserIndex">
+        <a href="{{ route('users.index')}}">ユーザ一覧</a>
+    </div>
 </body>
 </html>

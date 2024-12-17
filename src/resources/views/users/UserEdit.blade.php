@@ -10,7 +10,7 @@
         <h1>ユーザ編集ページ</h1>
 
         {{-- 更新のルートとidを引数にする(画像を投稿するため、enctype以降を記述) --}}
-        <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('この内容で確定しますか？');">
             @csrf
             @method('PATCH')
 

@@ -15,6 +15,8 @@
                 <th>プロフィール画像</th>
                 <th>名前 </th>
                 <th>メールアドレス</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -25,11 +27,18 @@
                         <!-- プロフィール画像の表示 -->
                         <img src="{{ $user->profile_image_url }}" alt="プロフィール画像" width="100" height="100">
                     </td>
-                    <td>
-                        {{-- ルートのusers.updateとidを引数に与える --}}
-                        <a href="{{ route('users.edit', $user->id) }}">{{ $user->name }}</a>
-                    </td>
+                    <td>{{ $user->name }}</td>
                     <td>{{ $user->email}}</td>
+                    <td>
+                        <a href="{{ route('users.edit', $user->id) }}">編集</a>
+                    </td>
+                    <td>
+                        <form action="{{ route('users.destroy', $user->id) }}" method="POST" onsubmit="return confirm('本当に削除しますか？');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">削除</button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

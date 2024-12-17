@@ -63,9 +63,12 @@ class UserController extends Controller
     // 削除処理
     public function destroy(string $id)
     {
-        // ユーザ取得->削除->リダイレクト
-        $user = User::findOrFail($id);
-        $user->delete();
-        return redirect()->route('users.index')->with('success','ユーザを削除しました');
+        try {
+            $user = User::findOrFail($id);
+            $user->delete();
+            return redirect()->route('users.index')->with('success','削除に成功しました');
+        } catch (\Exception $e) {
+            return redirect()->route('users.index')->with('error', '削除中にエラーが発生しました');
+        }
     }
 }

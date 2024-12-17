@@ -35,6 +35,12 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    // リレーション(1対多)
+
+    public function microposts(){
+        return $this->hasMany(MicroPost::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *

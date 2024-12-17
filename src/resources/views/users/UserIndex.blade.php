@@ -45,7 +45,7 @@
     </table>
 
     <div class="toMicropostIndex">
-        <a href="{{ route('posts.index')}}">投稿一覧</a>
+        <a href="{{ route('microposts.index')}}">投稿一覧</a>
     </div>
 </body>
 </html>

@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Route;
 
 // ユーザ作成はBreezeで行うため除外する(showはシンプルに使わない)
 Route::resource('/users', UserController::class)->except(['store', 'create', 'show']);
-Route::get('/postsIndex', [MicropostController::class, 'index']) // とりあえずのルーティング
+Route::resource('/microposts', MicropostController::class)->except(['index']);
 
-    // アクセスする前にauthとverifiedというミドルウェアが実行される
+Route::get('/microposts', [MicropostController::class, 'index'])
     // authはユーザのログインを、verifiedはメアドが確認済みかを確認する
-    ->middleware(['auth', 'verified'])
-    ->name('posts.index'); // 名前をつける
+    ->middleware(['auth', 'verified']) // アクセスする前にauthとverifiedというミドルウェアが実行される
+    ->name('microposts.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

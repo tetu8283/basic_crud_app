@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 // ユーザ作成はBreezeで行うため除外する(showはシンプルに使わない)
 Route::resource('/users', UserController::class)->except(['store', 'create', 'show']);
-Route::resource('/microposts', MicropostController::class)->except(['index']);
+Route::resource('/microposts', MicropostController::class)->except(['index', 'show']);
 
 Route::get('/microposts', [MicropostController::class, 'index'])
     // authはユーザのログインを、verifiedはメアドが確認済みかを確認する

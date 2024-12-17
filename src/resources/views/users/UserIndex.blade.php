@@ -8,7 +8,7 @@
 </head>
 <body>
     <p>ユーザ一覧</p>
-    <table border="1">
+    <table border="1" cellspacing="0" cellpadding="10">
         <thead>
             <tr>
                 <th>ID</th>

@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>User edit page</title>
+    <title>ユーザー編集</title>
 </head>
     <body>
         <h1>ユーザ編集ページ</h1>
+        <div class="toMicropostIndex">
+            <a href="{{ route('microposts.index')}}">投稿一覧</a>
+        </div>
 
         {{-- 更新のルートとidを引数にする(画像を投稿するため、enctype以降を記述) --}}
         <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data" onsubmit="return confirm('この内容で確定しますか？');">
